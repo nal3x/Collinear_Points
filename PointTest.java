@@ -1,7 +1,12 @@
+import edu.princeton.cs.algs4.Knuth;
+
+import java.util.Arrays;
+
 public class PointTest {
     public static void main(String[] args) {
         // testPointCompare();
-        testSlope();
+        // testSlope();
+        testComparator();
     }
     private static void testPointCompare() {
         Point axisOrigin = new Point(0, 0);
@@ -23,6 +28,30 @@ public class PointTest {
         }
         Point twoThirds = new Point(3, 2); // slope 2/3 to origin
         System.out.println(twoThirds + " to " + axisOrigin + " -> "+ twoThirds.slopeTo(axisOrigin));
+
+    }
+
+    private static void testComparator() {
+        Point originPoint = new Point(0, 0);
+        Point lowSlopePoint = new Point(1, 1);
+        Point highSlopePoint = new Point(1, 2);
+        Point samePoint = new Point(0, 0);
+        Point verticalPoint = new Point(0, 1);
+        Point oneEightyPoint = new Point (-1, 0);
+
+        Point[] pointsArray = {originPoint, highSlopePoint, lowSlopePoint, samePoint, verticalPoint
+                ,oneEightyPoint};
+        Knuth.shuffle(pointsArray);
+        System.out.println("*********Shuffled points:*********");
+        for (Point p : pointsArray) {
+            System.out.println(p + " " + String.valueOf(p.slopeTo(originPoint)));
+        }
+        System.out.println("*********Sorted points:*********");
+        Arrays.sort(pointsArray, originPoint.slopeOrder());
+        for (Point p : pointsArray) {
+            System.out.println(p + " " + String.valueOf(p.slopeTo(originPoint)));
+        }
+
 
     }
 }

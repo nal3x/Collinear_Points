@@ -93,10 +93,9 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        /* YOUR CODE HERE */
-        return null;
+        // create an instance of nested SlopeOrder class and returns it
+        return new SlopeOrder();
     }
-
 
     /**
      * Returns a string representation of this point.
@@ -115,5 +114,19 @@ public class Point implements Comparable<Point> {
      */
     public static void main(String[] args) {
 
+    }
+
+    private class SlopeOrder implements Comparator<Point> {
+        // Compares the slopes that q1 and q2 make with the invoking object p
+
+        @Override
+        public int compare(Point q, Point r) {
+            double slopeQtoP = Point.this.slopeTo(q);
+            double slopeRtoP = Point.this.slopeTo(r);
+
+            if (slopeQtoP < slopeRtoP) return -1;
+            else if (slopeQtoP > slopeRtoP) return 1;
+            else return 0;
+        }
     }
 }
